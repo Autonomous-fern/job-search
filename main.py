@@ -1,4 +1,5 @@
 import os
-from env import *
+import env
 
-#  api_key = os.environ["AIRTABLE_API_KEY"]
+
+print(env.AIRTABLE_API_KEY)
