@@ -1,21 +1,11 @@
-import requests  # module pour récupérer le code html d'une page
-from bs4 import BeautifulSoup  # module pour lire l'html d'une page
 import time  # nous permet de temporiser les requêtes à l'api dans une loop
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
 
-def find_offer(url):
-    page = requests.get(url)
-    if page.status_code == 200:
-        soup = BeautifulSoup(page.text, "lxml")
-        jobDescription = soup.find('div', {'data-automation': 'searchResults'})
-        return jobDescription.get_text()
-    else:
-        return None
+PATH = "C:\Program Files (x86)\chromedriver.exe"  # indicate path to chromedriver
+driver = webdriver.Chrome(PATH)  # select chrome driver
 
-
-url1 = "https://www.seek.com.au/devops-jobs/in-All-Sydney-NSW"
-
-print(find_offer(url1))
-
-
-# !! UPDATE >> the website have been updated and is not static anymore !!
+url1 = "https://www.seek.com.au/devops-jobs/in-All-Sydney-NSW?salaryrange=0-80000&salarytype=annual"
+page = driver.get(url1)
